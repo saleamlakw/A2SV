@@ -1,0 +1,28 @@
+class Solution:
+    def pancakeSort(self, arr: List[int]) -> List[int]:
+        ch=sorted(arr)
+        print(ch,"ch")
+        ans=[]
+        for i in range(len(arr))[::-1]:
+            m=arr.index(ch[i])
+            if m==i:
+                pass
+            else:
+                if  m==0:
+                    ans.append(i+1)
+                    arr[:i+1]=arr[:i+1][::-1]
+                else:
+                    arr[:m+1]=arr[:m+1][::-1]
+                    ans.append(m+1)
+                    ans.append(i+1)
+                    arr[:i+1]=arr[:i+1][::-1]
+        return ans 
+
+
+
+
+      
+        
+
+
+
