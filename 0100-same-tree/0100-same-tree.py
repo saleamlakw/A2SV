@@ -5,20 +5,18 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def inorder(self,root,arr):
+    def preorder(self,root,arr):
         if not root:
             arr.append(0)
             return 
         arr.append(root.val)
-        self.inorder(root.left,arr)
-        self.inorder(root.right,arr)
+        self.preorder(root.left,arr)
+        self.preorder(root.right,arr)
     def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
         ap=[]
         aq=[]
-        pp=self.inorder(p,ap)
-        qq=self.inorder(q,aq)
-        print(ap)
-        print(aq)
+        pp=self.preorder(p,ap)
+        qq=self.preorder(q,aq)
         if len(ap)!=len(aq):
             return False
         else:
