@@ -5,25 +5,16 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def preorder(self,root,arr):
-        if not root:
-            arr.append(0)
-            return 
-        arr.append(root.val)
-        self.preorder(root.left,arr)
-        self.preorder(root.right,arr)
-    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
-        ap=[]
-        aq=[]
-        pp=self.preorder(p,ap)
-        qq=self.preorder(q,aq)
-        if len(ap)!=len(aq):
+    def dfs(self,p,q):
+        if not p and not q:
+            return True
+        if not p or not q:
             return False
-        else:
-            for i in range(len(ap)):
-                if ap[i]!=aq[i]:
-                    return False
-        return True
+        return ((p.val == q.val) and 
+               self.dfs(p.left,q.left) and
+               self.dfs(p.right,q.right))
+    def isSameTree(self, p: Optional[TreeNode], q: Optional[TreeNode]) -> bool:
+        return self.dfs(p,q)
         
-        
+   
         
