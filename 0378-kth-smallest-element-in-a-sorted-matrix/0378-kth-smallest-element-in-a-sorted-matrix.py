@@ -6,8 +6,7 @@ class Solution:
             mat=matrix[0]
             for i in range(1,len(matrix)):
                 mat=self.merge(mat,matrix[i])
-            heapq.heapify(mat)
-            return heapq.nsmallest(k,mat)[-1]
+            return mat[k-1]
     def merge(self,left,right):
             res=[]
             i=0
