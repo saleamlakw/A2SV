@@ -15,8 +15,6 @@ class Solution:
         left=strs[0]
         for i in range(1,len(strs)):
             right=strs[i]
-            print(left)
-            print(right)
             left=self.sim(left,right)
             if not left:
                 return ""
