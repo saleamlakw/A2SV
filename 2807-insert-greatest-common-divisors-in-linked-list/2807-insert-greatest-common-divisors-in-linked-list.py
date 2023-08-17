@@ -14,7 +14,6 @@ class Solution:
         li=li.next
         while temp.next:
             x=gcd(temp.val,temp.next.val)
-            print(x)
             li.next=ListNode(x)
             li=li.next
             li.next=ListNode(temp.next.val)
