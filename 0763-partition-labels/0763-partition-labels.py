@@ -12,8 +12,6 @@ class Solution:
             else:
                 re-=1
             if re==0:
-                print("l",l)
-                print("r",r)
                 result.append(r-l+1)
                 l=r+1
         return result
