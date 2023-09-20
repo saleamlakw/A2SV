@@ -6,7 +6,7 @@ class Solution:
         re=-1
         if sum(nums)==x:
             return len(nums)
-        if target <=0:
+        if target <0:
             return -1
         for r in range(len(nums)):
             total+=nums[r]
