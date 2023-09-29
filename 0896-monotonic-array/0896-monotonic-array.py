@@ -1,7 +1,13 @@
 class Solution:
     def isMonotonic(self, nums: List[int]) -> bool:
-        print(list(reversed(sorted(nums))))
-        if nums==sorted(nums) or nums==list(reversed(sorted(nums))):
-            return True
-        else:
-            return False
+        mono_dec=True
+        mono_inc=True
+        for i in range(1,len(nums)):
+            if nums[i-1]>nums[i]:
+                mono_inc=False
+            if nums[i-1]<nums[i]:
+                mono_dec=False
+            if mono_dec==False and mono_inc==False:
+                return False
+        return True
+            
