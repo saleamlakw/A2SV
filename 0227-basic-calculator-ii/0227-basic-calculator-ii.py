@@ -4,17 +4,18 @@ class Solution:
             re=[]
             i=0
             while i<len(s):
-                while i<len(s) and  s[i]==" ":
+                if i<len(s) and s[i]==" ":
                     i+=1
-                nu=""
-                while i<len(s) and s[i].isnumeric():
-                    nu+=s[i]
-                    i+=1
-                if nu:
-                    re.append(nu)
-                if i<len(s) and s[i] in "+-*/":
+                elif s[i] in "+-*/":
                     re.append(s[i])
                     i+=1
+                else:
+                    nu=""
+                    while i<len(s) and s[i].isnumeric():
+                        nu+=s[i]
+                        i+=1
+                    if nu:
+                        re.append(nu)
             # print(re)
             return re
         def infToPost(s):
