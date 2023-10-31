@@ -6,7 +6,6 @@ class Solution:
         right=len(plants)-1
         res=0
         while left<=right:
-            ch=True
             if left ==right:
                 if capacityA==capacityB:
                     if capacityA>=plants[left]:
