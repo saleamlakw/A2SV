@@ -3,7 +3,6 @@ class Solution:
         li=deque()
         s=""
         for r in chars:
-            # print(li)
             res=0
             if li and li[-1]!=r:
                 while li:
@@ -13,14 +12,12 @@ class Solution:
                     s+=(poped+str(res))
                 else:
                      s+=(poped)
-                # print(s)
             li.append(r)
         if li:
             if len(li)>1:
                 s+=(li[-1]+str(len(li)))
             else:
                 s+=(li[-1])
-            # print(s)
         for kk in range(len(s)):
             chars[kk]=s[kk]
         return len(s)
