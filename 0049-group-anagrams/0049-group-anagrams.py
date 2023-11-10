@@ -3,5 +3,4 @@ class Solution:
         dic=defaultdict(list)
         for s in strs:
             dic["".join(list(sorted(s)))].append(s)
-        result=[]
         return dic.values()
