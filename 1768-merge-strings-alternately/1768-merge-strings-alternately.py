@@ -3,14 +3,9 @@ class Solution:
         result=""
         l,r=0,0
         while l<len(word1) and r<len(word2):
-                result+=word1[l]
+                result+=(word1[l]+word2[r])
                 l+=1
-                result+=word2[r]
                 r+=1
-        if l<len(word1):
-            result+=word1[l:]
-        if r<len(word2):
-            result+=word2[r:]
+        result+=(word1[l:]+word2[r:])
         return result
-                
             
