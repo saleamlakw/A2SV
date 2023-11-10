@@ -1,8 +1,9 @@
 class Solution:
     def numIdenticalPairs(self, nums: List[int]) -> int:
-        co=Counter(nums)
-        tot=0
-        for i in co:
-            tot+=math.comb(co[i],2)
-        return tot
-            
+        numCount=Counter()
+        result=0
+        for num in nums:
+            if numCount[num]>0:
+                result+=numCount[num]
+            numCount[num]+=1
+        return result
