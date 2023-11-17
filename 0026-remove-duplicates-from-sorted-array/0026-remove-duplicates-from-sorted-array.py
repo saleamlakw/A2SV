@@ -1,17 +1,11 @@
-class Solution(object):
-    def removeDuplicates(self, nums):
-        n=len(set(nums))
-        co=Counter()
-        l=1
-        for i in range(n):
-            co[nums[i]]+=1
-            if co[nums[i]]>1:
-                while l<len(nums) and co[nums[l]]>=1:
-                    l+=1
-                if l<len(nums):
-                    nums[i],nums[l]=nums[l],nums[i]
-                    co[nums[i]]+=1
-                    co[nums[l]]-=1
-        return n
-            
+class Solution:
+    def removeDuplicates(self,nums):
+        placeHolder=seeker=0
+        while seeker<len(nums):
+            if nums[placeHolder]!=nums[seeker]:
+                nums[placeHolder+1],nums[seeker]=nums[seeker],nums[placeHolder+1]
+                placeHolder+=1
+            seeker+=1
+        print(nums)
+        return placeHolder+1
         
