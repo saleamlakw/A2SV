@@ -15,7 +15,6 @@ class Solution(object):
             while n:
                 re+=str(n%base)
                 n=n//base
-            print(re)
             return re[::-1]
         for base in range(2,n-1):
             if not helper(intTObase(n,base)):
