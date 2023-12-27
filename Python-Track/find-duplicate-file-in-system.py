@@ -6,9 +6,7 @@ class Solution:
             root=all[0]
             for f in all[1:]:
                 l=f.split(".txt")
-                print(l)
                 num=l[0]
-                print(num)
                 content=l[1]
                 re=root+"/"+num+".txt"
                 hashmap[content].append(re)
