@@ -40,8 +40,6 @@ class MyLinkedList:
         elif not self.head:
             self.head=newNode
             self.length+=1
-        elif index==self.length:
-            self.addAtTail(val)
         elif index==0:
             self.addAtHead(val)
         else:
