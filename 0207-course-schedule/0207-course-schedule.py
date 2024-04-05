@@ -1,35 +1,30 @@
 class Solution:
     def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
-        #changing the reprsentaion of the graph from list to adjancy list
         graph=defaultdict(list)
-        for n in prerequisites:
-            graph[n[0]].append(n[1])
-        # print(graph)
-        white,gray,black=1,2,3
-        is_possible=True
-        color={k:white for k in range(numCourses)}
+        for ele in prerequisites:
+            graph[ele[0]].append(ele[1])
+        white=1
+        grey=2
+        black=3
+        color=[white]*numCourses
+        visited=set()
+        stop=False
         def dfs(node):
-            nonlocal is_possible
-            if not is_possible:
-                return
-            color[node]=gray
-            if node in graph:
-                for neighbor in graph[node]:
-                    if neighbor==node:
-                        is_possible=False
-                    if color[neighbor]==white:
-                        dfs(neighbor)
-                    elif  color[neighbor]==gray:
-                        is_possible=False
+            nonlocal stop
+            if stop:
+                return 
+            visited.add(node)
+            color[node]=grey
+            for nb in graph[node]:
+                if color[nb]==grey:
+                    stop=True
+                if nb not in visited:
+                    dfs(nb)
             color[node]=black
-            # print(color)
-        for n in graph:
-            if color[n]==white:
-                dfs(n)
-        return  is_possible 
-            
-        
-            
-        
-        
+        for ch in range(numCourses):
+            if stop:
+                return False
+            if ch not in visited:
+                dfs(ch)
+        return True
         
