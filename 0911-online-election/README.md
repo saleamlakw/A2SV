@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/online-election/">911. Online Election</a></h2><h3>Medium</h3><hr><div><p>You are given two integer arrays <code>persons</code> and <code>times</code>. In an election, the <code>i<sup>th</sup></code> vote was cast for <code>persons[i]</code> at time <code>times[i]</code>.</p>
+<h2><a href="https://leetcode.com/problems/online-election">911. Online Election</a></h2><h3>Medium</h3><hr><p>You are given two integer arrays <code>persons</code> and <code>times</code>. In an election, the <code>i<sup>th</sup></code> vote was cast for <code>persons[i]</code> at time <code>times[i]</code>.</p>
 
 <p>For each query at a time <code>t</code>, find the person that was leading the election at time <code>t</code>. Votes cast at time <code>t</code> will count towards our query. In the case of a tie, the most recent vote (among tied candidates) wins.</p>
 
@@ -12,8 +12,9 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input</strong>
-["TopVotedCandidate", "q", "q", "q", "q", "q", "q"]
+<pre>
+<strong>Input</strong>
+[&quot;TopVotedCandidate&quot;, &quot;q&quot;, &quot;q&quot;, &quot;q&quot;, &quot;q&quot;, &quot;q&quot;, &quot;q&quot;]
 [[[0, 1, 1, 0, 0, 1, 0], [0, 5, 10, 15, 20, 25, 30]], [3], [12], [25], [15], [24], [8]]
 <strong>Output</strong>
 [null, 0, 1, 1, 0, 0, 1]
@@ -41,4 +42,3 @@ topVotedCandidate.q(8); // return 1
 	<li><code>times[0] &lt;= t &lt;= 10<sup>9</sup></code></li>
 	<li>At most <code>10<sup>4</sup></code> calls will be made to <code>q</code>.</li>
 </ul>
-</div>
