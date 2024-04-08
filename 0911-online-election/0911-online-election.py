@@ -1,20 +1,28 @@
 class TopVotedCandidate:
 
     def __init__(self, persons: List[int], times: List[int]):
-        self.persons = []
-        self.times = []
-        self.dic = collections.defaultdict(int)
-        self.m = 0
-        self.idx = -1
-
-        for i in range(len(times)):
-            self.times.append(times[i])
-            self.dic[persons[i]] += 1
-            if self.dic[persons[i]] >= self.m:
-                self.persons.append(persons[i])
-                self.m = self.dic[persons[i]]
+        self.persons =persons
+        self.times=times
+        self.count=Counter()
+        self.count[self.persons[0]]+=1
+        self.winner=[[self.persons[0],self.count[self.persons[0]]]]
+        for i in range(1,len(self.persons)):
+            self.count[self.persons[i]]+=1
+            if self.count[self.persons[i]]>=self.winner[-1][-1]:
+                self.winner.append([self.persons[i],self.count[self.persons[i]]])
             else:
-                self.persons.append(self.persons[-1])
+                self.winner.append(self.winner[-1])
+        print(self.winner)
+
     def q(self, t: int) -> int:
-        idx = bisect.bisect_right(self.times,t)
-        return self.persons[idx-1]
+        ind=bisect_right(self.times,t)
+        
+        if ind-1>=0:
+            ind-=1
+        return self.winner[ind][0]
+        
+
+
+# Your TopVotedCandidate object will be instantiated and called as such:
+# obj = TopVotedCandidate(persons, times)
+# param_1 = obj.q(t)
