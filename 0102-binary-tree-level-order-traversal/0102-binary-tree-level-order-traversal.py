@@ -3,28 +3,23 @@
 #     def __init__(self, val=0, left=None, right=None):
 #         self.val = val
 #         self.left = left
-# self.right = right
+#         self.right = right
 class Solution:
-    from collections import deque
     def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
-        if not root:
-            return None
-        qu=deque()
-        re=[]
-        qu.append(root)
-        arr=[]
-        arr.append(root.val)
-        while qu:
-            re.append(arr.copy())
-            for i in range(len(qu)):
-                curr=qu.popleft()
-                arr.pop(0)
-                if curr.left:
-                    qu.append(curr.left)
-                    arr.append(curr.left.val)
-                if curr.right:
-                    qu.append(curr.right)
-                    arr.append(curr.right.val)
-        return re
-                
-        
+        visited=set([root.val]) if root else set()
+        queue=deque([root]) if root else deque()
+        result=[[root.val]] if root else []
+        while queue:
+            re=[]
+            for _ in range(len(queue)):
+                node=queue.popleft()
+                if node.left:
+                    queue.append(node.left)
+                    re.append(node.left.val)
+                if node.right:
+                    queue.append(node.right)
+                    re.append(node.right.val)
+            if re:
+                result.append(re[:])
+        return result
+
