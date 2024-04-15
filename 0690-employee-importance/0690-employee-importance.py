@@ -23,6 +23,6 @@ class Solution:
             for nb in graph[node][1]:
                 if nb not in visited:
                     re+=dfs(nb)
-            return graph[id][0]+ re
+            return graph[node][0]+ re
         
         return dfs(id) 
