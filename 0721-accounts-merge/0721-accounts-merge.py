@@ -9,16 +9,25 @@ class Solution:
             cc[acc[0]]+=1
         # print(parent)
         # print(g)
+        rank={i:0 for i in g}
+        # print(rank)
         def find(x):
-            return parent[x]
+            while x != parent[x]:
+                parent[x] = parent[parent[x]]
+                x = parent[x]
+            return x
         def union(x, y):
             parentX = find(x)
             parentY = find(y)
             # print("++++",parentX,parentY)
             if parentX != parentY:
-                for node in parent:
-                    if parent[node] == parentX:
-                        parent[node] = parentY
+                if rank[parentX]>rank[parentY]:
+                    parent[parentY]=parentX
+                elif rank[parentX]<rank[parentY]:
+                    parent[parentX]=parentY
+                elif rank[parentX]==rank[parentY]:
+                     parent[parentX]=parentY
+                     rank[parentY]+=1
                 # print("---",parentX,parentY,parent)
 
         # print(g)
