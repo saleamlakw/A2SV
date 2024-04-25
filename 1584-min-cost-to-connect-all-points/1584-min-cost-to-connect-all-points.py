@@ -6,12 +6,12 @@ class Solution:
                 point1=points[i]
                 point2=points[j]
                 distance = abs(point1[0]-point2[0])+abs(point1[1]-point2[1])
-                all.append([distance,tuple(point1),tuple(point2)])
+                all.append([distance,i,j])
         all.sort()
 
 
-        parent = {tuple(i):tuple(i) for i in points}
-        rank={tuple(i):0 for i in points}
+        parent = {i:i for i in range(len(points))}
+        rank={i:0 for i in range(len(points))}
         def find(x):
             while x != parent[x]:
                 parent[x] = parent[parent[x]]
@@ -32,8 +32,12 @@ class Solution:
             else:
                 return False
 
-        result=0
-        for ele in all:
-            if union(ele[1],ele[2]):
-                result+=ele[0]
-        return result
+        min_weight=0
+        min_edge=0
+        for w,u,v in all:
+            if union(u,v):
+                min_weight+=w
+                min_edge+=1
+            if min_edge>=len(points)-1:
+                break
+        return min_weight
