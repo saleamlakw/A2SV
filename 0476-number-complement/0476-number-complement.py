@@ -1,3 +1,3 @@
 class Solution:
     def findComplement(self, num: int) -> int:
-        return int("".join([str(1-int(i)) for i in bin(num)[2:]]),2)
+        return num^((1<<num.bit_length())-1)
