@@ -4,7 +4,7 @@ class Solution:
         for u,v in prerequisites:
             graph[u].append(v)
            
-        def shorest_path(source ,destination):
+        def path(source ,destination):
             queue=deque([source])
             visited=set([source])
             while queue:
@@ -18,7 +18,7 @@ class Solution:
             return False   
         result=[] 
         for a,b in queries:
-            if shorest_path(a,b):
+            if path(a,b):
                 result.append(True)
             else:
                 result.append(False) 
