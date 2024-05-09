@@ -1,6 +1,6 @@
 class Solution:
     def climbStairs(self, n: int) -> int:
-        @lru_cache()
+        @lru_cache(maxsize=n)
         def fib(n):
             if n<=0:
                 return 1
