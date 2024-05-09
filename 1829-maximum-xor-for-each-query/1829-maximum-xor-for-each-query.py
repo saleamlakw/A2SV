@@ -6,7 +6,7 @@ class Solution:
         xor=0
         for ele in nums:
             xor^=ele
-        print(xor)
+        # print(xor)
         result=[]
         for i in range(len(nums)-1,-1,-1):
             x=0
