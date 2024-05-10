@@ -1,7 +1,6 @@
 class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         memo=Counter()
-        coins.sort(reverse=True)
         def fn(target):
             if target in memo:
                 return memo[target]
