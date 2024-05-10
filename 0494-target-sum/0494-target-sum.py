@@ -10,8 +10,6 @@ class Solution:
                 else:
                     return 0
             if (i,target) not in memo:
-                l=fn(i+1,target-nums[i])
-                r=fn(i+1,target+nums[i])
-                memo[(i,target)]=l+r
+                memo[(i,target)]=fn(i+1,target-nums[i])+fn(i+1,target+nums[i])
             return memo[(i,target)]
         return fn(0,target)
