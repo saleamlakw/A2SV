@@ -10,11 +10,9 @@ class Solution:
             if target==0:
                 return 0
             temp=float("inf")
-            if (target) not in memo:
+            if target not in memo:
                 for j in range(len(coins)):
-                    if target>=coins[j]:
-                        re=1+fn(j,target-coins[j])
-                        temp=min(temp,re)
+                    temp=min(temp,1+fn(j,target-coins[j]))
                 memo[(target)]=temp
             return  memo[(target)]
         res =fn(0,amount) 
