@@ -2,7 +2,7 @@ class Solution:
     def coinChange(self, coins: List[int], amount: int) -> int:
         memo=Counter()
         coins.sort(reverse=True)
-        def fn(i,target):
+        def fn(target):
             if target in memo:
                 return memo[target]
             if target<0:
@@ -12,8 +12,8 @@ class Solution:
             temp=float("inf")
             if target not in memo:
                 for j in range(len(coins)):
-                    temp=min(temp,1+fn(j,target-coins[j]))
+                    temp=min(temp,1+fn(target-coins[j]))
                 memo[(target)]=temp
             return  memo[(target)]
-        res =fn(0,amount) 
+        res =fn(amount) 
         return res if res!=float("inf") else -1
