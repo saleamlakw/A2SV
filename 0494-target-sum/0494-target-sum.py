@@ -2,6 +2,8 @@ class Solution:
     def findTargetSumWays(self, nums: List[int], target: int) -> int:
         memo=Counter()
         def fn(i,target):
+            if (i,target) in memo:
+                return memo[(i,target)]
             if i>=len(nums):
                 if target==0:
                     return 1
