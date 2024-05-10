@@ -3,8 +3,8 @@ class Solution:
         memo=Counter()
         coins.sort(reverse=True)
         def fn(i,target):
-            if (i,target) in memo:
-                return memo[(i,target)]
+            if target in memo:
+                return memo[target]
             if target<0:
                 return float("inf")
             if target==0:
