@@ -1,22 +1,24 @@
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
-        if not nums:
-            return True
-        n = len(nums)
-        if sum(nums) % 2 != 0:
+        if sum(nums)%2!=0:
             return False
-        target = sum(nums)//2
-        memo = {}
-        
-        def helper(total, i):
-            nonlocal nums, memo
-            if (total, i) in memo:
-                return memo[(total, i)]
-            if i == len(nums):
-                return False
-            if total == 0:
+        memo={}
+        def fn(i,target):
+            # print(i,target)
+            if (i,target)  in memo:
+                return memo[(i,target)]
+            if target==0:
                 return True
-            memo[(total, i)] = helper(total-nums[i], i+1) or helper(total, i+1)
-            return memo[(total, i)]
+            if i==len(nums):
+                return False
+           
+            take=False
+            if target>=nums[i]:
+                take=fn(i+1,target-nums[i])
+            if not take :
+                not_take=fn(i+1,target)
+            memo[(i,target)]=take or not_take
+            return memo[(i,target)]
+        return fn(0,sum(nums)//2)
         
-        return helper(target, 0) 
+        
