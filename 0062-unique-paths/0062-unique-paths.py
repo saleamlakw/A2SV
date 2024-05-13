@@ -1,15 +1,17 @@
 class Solution:
     def uniquePaths(self, m: int, n: int) -> int:
         memo=Counter() #--->o(n)+2*o(n)
-        def inbound(r,c):
-            return 0<=r<m and 0<=c<n
-        def dp(r,c):
-            if r==0 and c==0:
-                return 1
-            if not inbound(r,c):
-                return 0
-            if (r,c) not in memo: 
-                memo[(r,c)]= dp(r-1,c)+dp(r,c-1)
-            return memo[(r,c)]
-        return dp(m-1,n-1)
+        dp=[[0]*n for _ in range(m)]
+        dp[0][0]=1
+        print(dp)
+
+        for i in range(m):
+            for j in range(n):
+                if i==0 and j==0:
+                    continue
+                up=dp[i-1][j] if i>0 else 0
+                left=dp[i][j-1] if j>0 else 0
+                dp[i][j]=up+left
+        return dp[m-1][n-1]
+       
             
