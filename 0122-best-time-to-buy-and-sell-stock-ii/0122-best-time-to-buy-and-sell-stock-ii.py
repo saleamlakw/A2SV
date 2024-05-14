@@ -1,19 +1,19 @@
 class Solution:
     def maxProfit(self, prices: List[int]) -> int:
-        memo=Counter()
+        memo=[[-1]*2 for _ in range(len(prices))]
         def dp(i,state):
             if i>=len(prices):
                 return 0
-            profit=float("-inf")
-            if (i,state) not in memo:
+            if memo[i][state]==-1:
+                profit=float("-inf")
                 if state:
-                    buy=-prices[i]+dp(i+1,0)
-                    notbuy=dp(i+1,1)
-                    memo[(i,state)]=max([profit,buy,notbuy])
+                    take=-prices[i]+dp(i+1,0)
+                    nottake=dp(i+1,1)
+                    profit= max(profit,max(take,nottake))
                 else:
-                    sell=prices[i]+dp(i+1,1)
-                    notsell=dp(i+1,0)
-                    memo[(i,state)]=max([profit,sell,notsell])
-            return memo[(i,state)]
+                    take=prices[i]+dp(i+1,1)
+                    nottake=dp(i+1,0)
+                    profit= max(profit,max(take,nottake))
+                memo[i][state]=profit
+            return memo[i][state]
         return dp(0,1)
-        
