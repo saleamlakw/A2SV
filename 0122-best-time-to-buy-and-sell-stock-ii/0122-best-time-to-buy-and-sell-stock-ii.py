@@ -7,13 +7,9 @@ class Solution:
             if memo[i][state]==-1:
                 profit=float("-inf")
                 if state:
-                    take=-prices[i]+dp(i+1,0)
-                    nottake=dp(i+1,1)
-                    profit= max(profit,max(take,nottake))
+                    profit= max(profit,-prices[i]+dp(i+1,0),dp(i+1,1))
                 else:
-                    take=prices[i]+dp(i+1,1)
-                    nottake=dp(i+1,0)
-                    profit= max(profit,max(take,nottake))
+                    profit= max(profit,prices[i]+dp(i+1,1),dp(i+1,0))
                 memo[i][state]=profit
             return memo[i][state]
         return dp(0,1)
