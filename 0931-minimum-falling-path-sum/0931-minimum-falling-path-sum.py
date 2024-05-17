@@ -4,7 +4,7 @@ class Solution:
         m=len(matrix[0])
 
 
-        dp=[[0]*m for _ in range(n-1)]+[matrix[n-1]]
+        dp=[[0]*(m)+[float("inf")] for _ in range(n-1)]+[matrix[n-1]+[float("inf")]]
         for r in range(n-1,-1,-1):
             for c in range(m-1,-1,-1):
                 if r==n-1:
@@ -12,11 +12,11 @@ class Solution:
                 if r==0:
                     mi=float("inf")
                     for j in range(m):
-                        re=min(matrix[r][j]+dp[r+1][j+1] if r+1<n and j+1<m else float("inf"), matrix[r][j]+dp[r+1][j-1] if r+1<n and j-1>=0 else float("inf"),matrix[r][j]+dp[r+1][j] if r+1<n else float("inf"))
+                        re=min(matrix[r][j]+dp[r+1][j+1], matrix[r][j]+dp[r+1][j-1] if j-1>=0 else float("inf"),matrix[r][j]+dp[r+1][j])
                         mi=min(mi,re)
                     dp[r][c]= mi
                 else:
-                    dp[r][c]=min(matrix[r][c]+dp[r+1][c+1] if r+1<n and c+1<m else float("inf"), matrix[r][c]+dp[r+1][c-1] if r+1<n and c-1>=0 else float("inf"),matrix[r][c]+dp[r+1][c] if r+1<n else float("inf"))
+                    dp[r][c]=min(matrix[r][c]+dp[r+1][c+1] , matrix[r][c]+dp[r+1][c-1] if c-1>=0 else float("inf"),matrix[r][c]+dp[r+1][c])
                     # print(dp)
         return dp[0][0]
         
