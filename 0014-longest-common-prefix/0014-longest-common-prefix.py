@@ -1,22 +1,49 @@
+class TrieNode:
+    def __init__(self):
+        self.childrens=defaultdict(TrieNode)
+        self.isEnd=False
+
+class Trie:
+    def __init__(self):
+        self.root=TrieNode()
+
+    def insert(self,word):
+        current=self.root
+        for letter in word:
+            current=current.childrens[letter]
+        current.isEnd=True
+    def search(self,word):
+        current=self.root
+        for letter in word:
+            current=current.childrens.get(letter)
+            if not current:
+                return False 
+        return current.isEnd
+    def startsWith(self,prefix):
+        current=self.root
+        for letter in word:
+            current=current.childrens.get(letter)
+            if not current:
+                return False
+        return True
 class Solution:
-    def sim(self,left,right):
-        re=""
-        i=0
-        while i<len(left) and i<len(right):
-            if left[i]==right[i]:
-                re+=left[i]
-            else:
-                return re
-            i+=1
-        return re
     def longestCommonPrefix(self, strs: List[str]) -> str:
-        if not strs:
-            return ""
-        left=strs[0]
-        for i in range(1,len(strs)):
-            right=strs[i]
-            left=self.sim(left,right)
-            if not left:
-                return ""
-        return left
-        
+            trie=Trie()
+            result=""
+            for ele in strs:
+                trie.insert(ele)
+            
+            key=strs[0]
+            cur=trie.root.childrens
+            # print(cur)
+            if len(cur)!=1:
+                return ""     
+            for letter in key:
+                result+=letter
+                cur=cur[letter].childrens
+                if len(cur)!=1:
+                    break
+                
+            return result
+                    
+                
