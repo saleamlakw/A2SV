@@ -16,20 +16,23 @@ class Trie:
     def search(self, word: str) -> bool:
         current=self.root
         for letter in word:
-            current=current.childrens[letter]
+            current=current.childrens.get(letter)
             if not current:
                 return False
            
         return current.isEnd
 
     def startsWith(self, prefix: str) -> bool:
+        
         current=self.root
         for letter in prefix:
             current=current.childrens.get(letter)
+            if current:
+                print(current.childrens)
             if not current:
                 return False
        
-        return True and current.childrens
+        return True 
 
 
 # Your Trie object will be instantiated and called as such:
