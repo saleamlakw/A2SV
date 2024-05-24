@@ -29,15 +29,17 @@ class Trie:
 class Solution:
     def findMaximumXOR(self, nums: List[int]) -> int:
         trie=Trie()
+        n=(max(nums).bit_length())
+        print(n)
         for ele in nums:
             b=bin(ele)[2:]
-            bi="0"*(32-len(b))+b
+            bi="0"*(n-len(b))+b
             trie.insert(bi)
         result=0
         for num in nums:
             re=0
             cur=trie.root.children
-            for i in range(31,-1,-1):
+            for i in range(n-1,-1,-1):
                 if (num & 1<<i):
                     if "0" in cur:
                         re=re|1<<i
