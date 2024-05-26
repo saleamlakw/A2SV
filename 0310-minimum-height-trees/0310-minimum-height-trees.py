@@ -1,5 +1,7 @@
 class Solution:
     def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
+        if n==1:
+            return [0]
         def findOrder(n,edgelist):
             graph=defaultdict(list)
             indegree=[0]*n
