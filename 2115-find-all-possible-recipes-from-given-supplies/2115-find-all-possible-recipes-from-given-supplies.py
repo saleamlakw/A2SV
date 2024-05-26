@@ -5,13 +5,15 @@ class Solution:
         # print(supplies,supplies2)
         graph=defaultdict(list)
         indegree=defaultdict(int)
+        all=[]
         for i in range(len(recipes)):
             ch=True
             for ele in ingredients[i]:
                 ch = ch and (ele in supplies or ele in supplies2)
                 # print(ch)
             if ch:
-               for ele in ingredients[i]:
+                all.append(recipes[i])
+                for ele in ingredients[i]:
                     if ele in recipes:
                         graph[ele].append(recipes[i])
                         indegree[recipes[i]]+=1
@@ -22,7 +24,7 @@ class Solution:
             result=[]
 
             queue=deque()
-            for node in recipes:
+            for node in all:
                 if indegree[node]==0:
                     queue.append(node)
             
