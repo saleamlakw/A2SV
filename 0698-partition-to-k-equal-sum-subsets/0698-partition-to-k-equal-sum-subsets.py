@@ -3,28 +3,20 @@ class Solution:
         tot=sum(nums)
         n=len(nums)
         if tot%k!=0:
-            return False
-        
-        h=tot//k
-        def backtrack(i,re):
-            # print(i,re)
-            if re==h:
+            return False 
+        target=tot//k
+        memo={}
+        def backtrack(re,mask):
+            if mask==(1<<n)-1:
                 return True
-            if i>=n or re>h:
-                return False
-            re1=False
-            if nums[i]:
-                re1=backtrack(i+1,re+nums[i]) 
-            if re1:
-                nums[i]=None
-                return re1
-            re2=backtrack(i+1,re)
-            return re1 or re2
-        while k:
-            res=backtrack(0,0)
-            # print(res)
-            # print(nums)
-            if not res:
-                return False
-            k-=1
-        return True
+            if k==target:
+                return backtrack(0,mask)
+            if (re,mask) not in memo:
+                temp=False
+                for j in range(n):
+                    if mask&(1<<j) and re+nums[j]>target:
+                        continue
+                    temp =temp or backtrack(re+nums[j],mask|(1<<j))
+                memo[(re,mask)]=temp
+            return memo[(re,mask)]
+        return backtrack(0,0)
