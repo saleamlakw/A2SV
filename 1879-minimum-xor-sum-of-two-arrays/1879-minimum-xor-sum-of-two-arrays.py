@@ -11,7 +11,7 @@ class Solution:
                 for j in range(n):
                     if  mask&(1<<j):
                         continue
-                    temp=min(temp,nums1[i]^nums2[j]+backtrack(i+1,mask|(1<<j)))
+                    temp=min(temp,(nums1[i]^nums2[j])+backtrack(i+1,mask|(1<<j)))
                 memo[(i,mask)]=temp
             return memo[(i,mask)]
         return backtrack(0,0)
