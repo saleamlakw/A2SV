@@ -1,17 +1,17 @@
 class Solution:
     def minimumXORSum(self, nums1: List[int], nums2: List[int]) -> int:
         n=len(nums1)
-        memo={}
-        def backtrack(i,mask):
-            # print(i,bin(mask)[2:])
-            if i>=n:
-                return 0
-            if (i,mask) not in memo:
+        dp=[[float("inf")]*(1<<n) for _ in range(n)]
+        
+        for i in range(n-1,-1,-1):
+            for mask in range((1<<n)-1,-1,-1):
                 temp=float("inf")
                 for j in range(n):
                     if  mask&(1<<j):
                         continue
-                    temp=min(temp,(nums1[i]^nums2[j])+backtrack(i+1,mask|(1<<j)))
-                memo[(i,mask)]=temp
-            return memo[(i,mask)]
-        return backtrack(0,0)
+                    res=dp[i+1][mask|(1<<j)] if (i+1)<n else 0
+                    temp=min(temp,(nums1[i]^nums2[j])+res) 
+                dp[i][mask]=temp
+                # print(dp)
+        return dp[0][0]
+       
