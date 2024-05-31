@@ -1,23 +1,35 @@
 class Solution:
     def minimumTime(self, n: int, relations: List[List[int]], time: List[int]) -> int:
-        @cache
-        def dfs(node):
-            if not graph[node]:
-                return time[node]
-            
-            ans = 0
-            for neighbor in graph[node]:
-                ans = max(ans, dfs(neighbor))
+        indegree=[0]*n
+        graph=defaultdict(list)
 
-            return time[node] + ans
-        
-        graph = defaultdict(list)
-        for (x, y) in relations:
-            graph[x - 1].append(y - 1)
-        
-        ans = 0
-        for node in range(n):
-            ans = max(ans, dfs(node))
+        for pre,cor in relations :
 
-        return ans
+            graph[pre].append(cor)
+            indegree[cor-1]+=1
+
+        queue=deque()
+        for i in range(n):
+            if indegree[i]==0:
+                queue.append([i+1,time[i]])
+       
+        result=0
+        mx=0
+        hashmap=Counter()
+        while queue:
+            print(queue)
+            for _ in range(len(queue)):
+                node,month=queue.popleft()
+                mx=max(mx,month)
+                if graph[node]:
+                    mx=max(mx,time[node-1])
+                for nb in graph[node]:
+                    hashmap[nb]=max(hashmap[nb],month)
+                    indegree[nb-1]-=1
+                    if indegree[nb-1]==0:
+                        queue.append([nb,hashmap[nb]+time[nb-1]])
+          
+     
+        
+        return mx
         
