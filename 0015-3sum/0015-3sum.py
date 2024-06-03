@@ -1,24 +1,35 @@
 class Solution:
    def threeSum(self, nums):
-    res = []
-    nums.sort()
-    for i in range(len(nums)-2):
-        if i > 0 and nums[i] == nums[i-1]:
-            continue
-        l, r = i+1, len(nums)-1
-        while l < r:
-            s = nums[i] + nums[l] + nums[r]
-            if s < 0:
-                l +=1 
-            elif s > 0:
-                r -= 1
-            else:
-                res.append((nums[i], nums[l], nums[r]))
-                while l < r and nums[l] == nums[l+1]:
-                    l += 1
-                while l < r and nums[r] == nums[r-1]:
-                    r -= 1
-                l += 1; r -= 1
-    return res
+        result=set()
+        nums.sort()
+        # print(nums)
+        for i in range(len(nums)-2):
+            l=i+1
+            r=len(nums)-1
+            while r>l:
+               
+                sum_=nums[i]+nums[l]+nums[r]
+                # print(sum_,nums[i],nums[l],nums[r])
+                if sum_<0:
+                    l+=1
+                elif sum_>0:
+                    r-=1
+                else:
+                    result.add(tuple(sorted(list([nums[i],nums[l],nums[r]]))))
+                    while r>l and nums[l]==nums[l+1]:
+                        l+=1
+                    while r>l and nums[r]==nums[r-1]:
+                        r-=1
+                    l+=1
+                    r-=1
+        return list(result)
+                
+
+
+            
+            
+        return result
+
+            
             
 
