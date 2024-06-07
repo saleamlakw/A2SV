@@ -12,34 +12,27 @@ class Trie:
                 cur.children[letter]=TrieNode()
             cur=cur.children[letter]
         cur.isEnd=True
-
     def search(self,word):
         cur=self.root
-        result=""
+        re=""
         for letter in word:
             if letter not in cur.children:
                 return word
-            result+=letter
-            cur=cur.children[letter]
-            if cur.isEnd:
-                return result
-        return word
-    def startsWith(self,prefix):
-        cur=self.root
-        for letter in word:
-            if letter not in cur.children:
-                return False
-            cur=cur.children[letter]
-        return True
 
+            cur=cur.children[letter]
+            re+=letter
+            if cur.isEnd:
+                return re
+        return word
 
 class Solution:
     def replaceWords(self, dictionary: List[str], sentence: str) -> str:
         trie=Trie()
-        for ele in dictionary:
-            trie.insert(ele)
+        for word in dictionary:
+            trie.insert(word)
+        sentence=sentence.split()
 
-        sen=sentence.split()
-        for i in range(len(sen)):
-            sen[i]=trie.search(sen[i])
-        return " ".join(sen)
+        for i in range(len(sentence)):
+            sentence[i]=trie.search(sentence[i])
+        return " ".join(sentence)
+
