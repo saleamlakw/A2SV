@@ -1,16 +1,15 @@
 class Solution:
     def mincostTickets(self, days: List[int], costs: List[int]) -> int:
-        memo={}
-        def dp(i,t):
+        memo=Counter()
+        def dp(i,pass_days):
             if i>=len(days):
                 return 0
-            if (i,t) not in memo:
-                re=float("inf")
-                if days[i]>=t:
-                    re=min(dp(i+1,days[i]+1)+costs[0],dp(i+1,days[i]+7)+costs[1],dp(i+1,days[i]+30)+costs[2])
-                else:
-                    re=min(re,dp(i+1,t))
-                memo[(i,t)]=re
-            return memo[(i,t)]
+            if (i,pass_days) not in memo:
+                if days[i]>pass_days:
+                    take=min(costs[0]+dp(i+1,days[i]),costs[1]+dp(i+1,days[i]+6),costs[2]+dp(i+1,days[i]+29))
+                    memo[(i,pass_days)]=take
+                else:   
+                    nottake=dp(i+1,pass_days)
+                    memo[(i,pass_days)]=nottake
+            return memo[(i,pass_days)]
         return dp(0,0)
-            
