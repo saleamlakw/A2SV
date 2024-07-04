@@ -1,22 +1,17 @@
 class Solution:
     def partitionLabels(self, s: str) -> List[int]:
-        visit=set()
-        co=Counter(s)
+        last_occurance=defaultdict()
+        for i in range(len(s)):
+            last_occurance[s[i]]=i
+        
+        res=[]
+        count=Counter(s)
+        max_index=0
         l=0
-        re=0
-        result=[]
-        for r in range(len(s)):
-            if s[r] not in visit:
-                re+=(co[s[r]]-1)
-                visit.add(s[r])
-            else:
-                re-=1
-            if re==0:
-                result.append(r-l+1)
-                l=r+1
-        return result
-            
-                
-                
-                
-            
+        for i in range(len(s)):
+            count[s[i]]-=1
+            if count[s[i]]==0 and i>=max_index:
+                res.append((i-l)+1)
+                l=i+1
+            max_index=max(max_index,last_occurance[s[i]])
+        return res
