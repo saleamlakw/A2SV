@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/partition-labels/">763. Partition Labels</a></h2><h3>Medium</h3><hr><div><p>You are given a string <code>s</code>. We want to partition the string into as many parts as possible so that each letter appears in at most one part.</p>
+<h2><a href="https://leetcode.com/problems/partition-labels">763. Partition Labels</a></h2><h3>Medium</h3><hr><p>You are given a string <code>s</code>. We want to partition the string into as many parts as possible so that each letter appears in at most one part.</p>
 
 <p>Note that the partition is done so that after concatenating all the parts in order, the resultant string should be <code>s</code>.</p>
 
@@ -7,17 +7,19 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input:</strong> s = "ababcbacadefegdehijhklij"
+<pre>
+<strong>Input:</strong> s = &quot;ababcbacadefegdehijhklij&quot;
 <strong>Output:</strong> [9,7,8]
 <strong>Explanation:</strong>
-The partition is "ababcbaca", "defegde", "hijhklij".
+The partition is &quot;ababcbaca&quot;, &quot;defegde&quot;, &quot;hijhklij&quot;.
 This is a partition so that each letter appears in at most one part.
-A partition like "ababcbacadefegde", "hijhklij" is incorrect, because it splits s into less parts.
+A partition like &quot;ababcbacadefegde&quot;, &quot;hijhklij&quot; is incorrect, because it splits s into less parts.
 </pre>
 
 <p><strong class="example">Example 2:</strong></p>
 
-<pre><strong>Input:</strong> s = "eccbbbbdec"
+<pre>
+<strong>Input:</strong> s = &quot;eccbbbbdec&quot;
 <strong>Output:</strong> [10]
 </pre>
 
@@ -28,4 +30,3 @@ A partition like "ababcbacadefegde", "hijhklij" is incorrect, because it splits 
 	<li><code>1 &lt;= s.length &lt;= 500</code></li>
 	<li><code>s</code> consists of lowercase English letters.</li>
 </ul>
-</div>
