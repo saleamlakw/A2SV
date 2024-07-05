@@ -1,8 +1,5 @@
 class Solution:
-    def __init__(self):
-        self.memo=Counter()
     def fib(self, n: int) -> int:
-
             dp=[0]*(n+1)
             dp[0]=0
             if n>=1:
