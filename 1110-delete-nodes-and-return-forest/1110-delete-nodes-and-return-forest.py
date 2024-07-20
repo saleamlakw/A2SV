@@ -23,6 +23,7 @@ class Solution:
                     q.append([node.left,fam])
                     if node.left.val in to_delete:
                         node.left=None
+                
                 if node.right:
                     q.append([node.right,fam])
                     if node.right.val in to_delete:
