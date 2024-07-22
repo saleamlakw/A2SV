@@ -4,7 +4,7 @@ class Solution:
         m=len(matrix[0])
 
 
-        dp=[[float("inf")]*(m)+[float("inf")] for _ in range(n-1)]+[matrix[n-1]+[float("inf")]]
+        dp=[[float("inf")]*(m+1) for _ in range(n-1)]+[matrix[n-1]+[float("inf")]]
         for r in range(n-1,-1,-1):
             for c in range(m-1,-1,-1):
                 if r==n-1:
