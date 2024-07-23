@@ -38,6 +38,7 @@ class Solution:
                 if nb not in visited:
                    dfs(nb)
         
+        
         for tt in time:
             visited=set()
             for node in all[tt]:
