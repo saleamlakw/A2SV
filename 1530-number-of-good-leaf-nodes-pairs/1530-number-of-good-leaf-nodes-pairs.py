@@ -6,41 +6,45 @@
 #         self.right = right
 class Solution:
     def countPairs(self, root: TreeNode, distance: int) -> int:
-        leafs=[]
+        leafs=set()
         graph=defaultdict(list)
 
         def dfs(node):
             if not node.left and not node.right:
-                leafs.append(node.val)
+                leafs.add(node)
             if node.left:
-                graph[node.val].append(node.left.val)
-                graph[node.left.val].append(node.val)
+                graph[node].append(node.left)
+                graph[node.left].append(node)
                 dfs(node.left)
             if node.right:
-                graph[node.val].append(node.right.val)
-                graph[node.right.val].append(node.val)
+                graph[node].append(node.right)
+                graph[node.right].append(node)
                 dfs(node.right)
         dfs(root)
-      
-        def bfs(start,des):
+
+        
+        ans=0
+        def bfs(start):
+            nonlocal ans
             visited=set([start])
             queue=deque([start])
-            distance=0
+            dist=0
             while queue:
                 for _ in range(len(queue)):
+                    if dist>distance:
+                        return 
                     node=queue.popleft()
-                    if node==des:
-                        return distance
+                    if node !=start and node in leafs and dist<=distance:
+                            ans+=1
                     for  nb in graph[node]:
                         if nb not in visited:
                             queue.append(nb)
                             visited.add(nb)
-                distance+=1
+                dist+=1
        
         
-        ans=0
-        for i in range(len(leafs)-1):
-            if bfs(leafs[i],leafs[i+1])<=distance:
-                ans+=1
-        return ans
+     
+        for ele in leafs:
+            bfs(ele)       
+        return ans//2
             
