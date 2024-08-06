@@ -2,15 +2,15 @@ class Solution:
     def findMinHeightTrees(self, n: int, edges: List[List[int]]) -> List[int]:
         if n==1:
             return [0]
-        def findOrder(n,edgelist):
+        def topological_sort(n,edgelist):
             graph=defaultdict(list)
             indegree=[0]*n
-            for cor ,pre in edgelist:
-                graph[pre].append(cor)
-                graph[cor].append(pre)
-                indegree[cor]+=1
-                indegree[pre]+=1
-            # print(indegree)
+            for u ,v in edgelist:
+                graph[v].append(u)
+                graph[u].append(v)
+                indegree[u]+=1
+                indegree[v]+=1
+
             
             result=[]
             
@@ -18,9 +18,9 @@ class Solution:
             for node in range(n):
                 if indegree[node]==1:
                     queue.append(node)
-            pe=queue.copy()
+            prev=queue.copy()
             while queue:
-                pe=queue.copy()
+                prev=queue.copy()
                 for _ in range(len(queue)):
                     node=queue.popleft()
                     result.append(node)
@@ -30,6 +30,7 @@ class Solution:
 
                         if indegree[nb]==1:
                             queue.append(nb)
+                            
                 
-            return pe
-        return findOrder(n,edges)
+            return prev
+        return topological_sort(n,edges)
