@@ -1,14 +1,16 @@
 class Solution:
     def shiftingLetters(self, s: str, shifts: List[List[int]]) -> str:
-        arr=[0]*len(s)
-        for l,r,d in shifts:
-            k=2*d-1
-            arr[l]+=k
-            if r+1<len(s):
-                arr[r+1]-=k
-        arr=list(accumulate(arr))
-        result=[]
+        ru=[0]*len(s)
+
+        for start,end,shift in shifts:
+            ru[start]+=((2*shift)-1)
+            if end+1<len(s):
+                ru[end+1]-=((2*shift)-1)
+        
+        for i in range(1,len(s)):
+            ru[i]+=ru[i-1]
+       
+        ans=[]
         for i in range(len(s)):
-            re=chr((((ord(s[i])+arr[i])-ord("a"))%26)+ord("a"))
-            result.append(re)
-        return "".join(result)
+           ans.append(chr((ord(s[i])+ru[i]-ord("a"))%26+ord("a")))
+        return "".join(ans)
