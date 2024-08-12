@@ -9,7 +9,7 @@ class KthLargest:
     def add(self, val: int) -> int:
         # print(self.nums)
         if len(self.nums)<self.k:
-            heappush(val)
+            heappush(self.nums,val)
         else:
             if val>self.nums[0]:
                 heapreplace(self.nums,val)
