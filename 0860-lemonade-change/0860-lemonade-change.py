@@ -3,6 +3,7 @@ class Solution:
         five=0
         ten=0
 
+
         for i in range(len(bills)):
             if bills[i]==5:
                 five+=5
