@@ -8,7 +8,6 @@ class Solution:
         all.sort()
         res=0
 
-        print(all)
         l,r=0,len(arrays)
 
         if all[0][1]!=all[-1][1]:
