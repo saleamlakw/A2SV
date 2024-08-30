@@ -1,26 +1,26 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
-        mi=float("inf")
-        ma=float('-inf')
-        l,r=0,len(nums)-1
-        while l<=r:
-            mid=(l+r)//2
-            if target==nums[mid]:
-                mi=min(mi,mid)
-                r=mid-1
-            elif target>nums[mid]:
-                l=mid+1
-            else:
-                r=mid-1
-        l,r=0,len(nums)-1
-        while l<=r:
-            mid=(l+r)//2
-            if target==nums[mid]:
-                ma=max(ma,mid)
-                l=mid+1
-            elif target>nums[mid]:
-                l=mid+1
-            else:
-                r=mid-1
-        return [mi,ma] if ma != float('-inf') and mi!=float("inf") else [-1,-1]
-            
+        def lower_bound(arr):
+            low=0
+            high=len(arr)-1
+
+            while low<=high:
+                mid=(low+high)//2
+                if arr[mid]<target:
+                    low=mid+1
+                else:
+                    high=mid-1
+            return low if low <len(arr) and 0<=low and  arr[low]==target else -1
+        def upper_bound(arr):
+            low=0
+            high=len(nums)-1
+
+            while low<=high:
+                mid=(low+high)//2
+                if arr[mid]>target:
+                    high=mid-1
+                else:
+                    low=mid+1
+            return high if high <len(arr) and 0<=high and arr[high]==target else -1
+
+        return [lower_bound(nums),upper_bound(nums)]
