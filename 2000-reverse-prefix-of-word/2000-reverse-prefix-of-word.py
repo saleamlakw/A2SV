@@ -1,11 +1,13 @@
-class Solution(object):
-    def reversePrefix(self, word, ch):
-        switch=True
-        result=""
-        for i in range(len(word)):
-            result+=word[i]
-            if word[i]==ch and switch:
-                switch=False
-                result=result[::-1]
-        return result
-        
+class Solution:
+    def reversePrefix(self, word: str, ch: str) -> str:
+        ind=float("inf")
+
+        for i,char in enumerate(word):
+            if char == ch:
+                ind = min (ind,i)
+
+        if ind == float("inf"):
+            return word
+        else:
+            return word[:ind+1][::-1]+word[ind+1:]
+
