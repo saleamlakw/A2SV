@@ -11,7 +11,7 @@ class Solution:
             for nb in graph[node]:
                 if nb not in visited:
                     dfs(nb)
-        # print(graph)
+    
         visited=set()
         re=[0]*len(s)
         for i in range(len(s)):
