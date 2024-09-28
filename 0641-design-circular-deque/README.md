@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/design-circular-deque/">641. Design Circular Deque</a></h2><h3>Medium</h3><hr><div><p>Design your implementation of the circular double-ended queue (deque).</p>
+<h2><a href="https://leetcode.com/problems/design-circular-deque/?envType=daily-question&envId=2024-09-28">641. Design Circular Deque</a></h2><h3>Medium</h3><hr><p>Design your implementation of the circular double-ended queue (deque).</p>
 
 <p>Implement the <code>MyCircularDeque</code> class:</p>
 
@@ -17,8 +17,9 @@
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
 
-<pre><strong>Input</strong>
-["MyCircularDeque", "insertLast", "insertLast", "insertFront", "insertFront", "getRear", "isFull", "deleteLast", "insertFront", "getFront"]
+<pre>
+<strong>Input</strong>
+[&quot;MyCircularDeque&quot;, &quot;insertLast&quot;, &quot;insertLast&quot;, &quot;insertFront&quot;, &quot;insertFront&quot;, &quot;getRear&quot;, &quot;isFull&quot;, &quot;deleteLast&quot;, &quot;insertFront&quot;, &quot;getFront&quot;]
 [[3], [1], [2], [3], [4], [], [], [], [4], []]
 <strong>Output</strong>
 [null, true, true, true, false, 2, true, true, true, 4]
@@ -44,4 +45,3 @@ myCircularDeque.getFront();     // return 4
 	<li><code>0 &lt;= value &lt;= 1000</code></li>
 	<li>At most <code>2000</code> calls will be made to <code>insertFront</code>, <code>insertLast</code>, <code>deleteFront</code>, <code>deleteLast</code>, <code>getFront</code>, <code>getRear</code>, <code>isEmpty</code>, <code>isFull</code>.</li>
 </ul>
-</div>
