@@ -1,4 +1,4 @@
-<h2><a href="https://leetcode.com/problems/maximize-score-of-numbers-in-ranges/">3281. Maximize Score of Numbers in Ranges</a></h2><h3>Medium</h3><hr><div><p>You are given an array of integers <code>start</code> and an integer <code>d</code>, representing <code>n</code> intervals <code>[start[i], start[i] + d]</code>.</p>
+<h2><a href="https://leetcode.com/problems/maximize-score-of-numbers-in-ranges/">3281. Maximize Score of Numbers in Ranges</a></h2><h3>Medium</h3><hr><p>You are given an array of integers <code>start</code> and an integer <code>d</code>, representing <code>n</code> intervals <code>[start[i], start[i] + d]</code>.</p>
 
 <p>You are asked to choose <code>n</code> integers where the <code>i<sup>th</sup></code> integer must belong to the <code>i<sup>th</sup></code> interval. The <strong>score</strong> of the chosen integers is defined as the <strong>minimum</strong> absolute difference between any two integers that have been chosen.</p>
 
@@ -37,4 +37,3 @@
 	<li><code>0 &lt;= start[i] &lt;= 10<sup>9</sup></code></li>
 	<li><code>0 &lt;= d &lt;= 10<sup>9</sup></code></li>
 </ul>
-</div>
