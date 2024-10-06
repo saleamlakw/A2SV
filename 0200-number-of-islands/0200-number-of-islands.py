@@ -1,7 +1,7 @@
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
         directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
-        visited = [[False for i in range(len(grid[0]))] for j in range(len(grid))]
+        visited = [[False]*len(grid[0]) for _ in range(len(grid))]
         def inbound(r,c):
             return 0<=r<len(grid) and 0<=c<len(grid[0])
         ans=0
