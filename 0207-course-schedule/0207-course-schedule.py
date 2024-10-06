@@ -20,7 +20,7 @@ class Solution:
                     stop=True
                 if nb not in visited:
                     dfs(nb)
-            color[node]=black
+            # color[node]=black
         for ch in range(numCourses):
             if stop:
                 return False
