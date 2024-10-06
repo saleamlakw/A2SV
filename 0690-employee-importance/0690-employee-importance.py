@@ -12,17 +12,17 @@ class Solution:
         graph=defaultdict(list)
         for emp in employees:
             graph[emp.id]=[emp.importance,emp.subordinates]
-        print(graph)
-        visited=set()
 
-        def dfs(node):
-            visited.add(node)
-            if len(graph[node][1])==0:
-                return graph[node][0]
-            re=0
-            for nb in graph[node][1]:
-                if nb not in visited:
-                    re+=dfs(nb)
-            return graph[id][0]+ re
-        
-        return dfs(id) 
+        stack=[id]
+        visited=set()
+        ans=0
+        while stack:
+            node=stack.pop()
+            if node not in visited:
+                visited.add(node)
+                ans+=graph[node][0]
+                for nb in graph[node][1]:
+                    if nb not in visited:
+                        stack.append(nb)
+                        
+        return ans 
