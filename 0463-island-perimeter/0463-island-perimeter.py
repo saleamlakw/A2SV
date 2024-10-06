@@ -1,26 +1,22 @@
 class Solution:
-    def dfs(self,grid,r,c,visited,directions,re):
-        visited[r][c]=2
-        if grid[r][c]==1:
-             for rn,cn in directions:
-                rrr=rn+r
-                ccc=cn+c
-                if (0>rrr or rrr>=len(grid) or 0>ccc or ccc>=len(grid[0])):
-                    re.append(1)
-                if (0<=rrr <len(grid) and 0<=ccc<len(grid[0])) and grid[rrr][ccc]!=1:
-                    re.append(1)
-        for rn,cn in directions:
-            rr=rn+r
-            cc=cn+c
-            if (0<=rr<len(grid) and 0<=cc<len(grid[0]) and visited[rr][cc]!=2):
-                self.dfs(grid,rr,cc,visited,directions,re)
-        return
     def islandPerimeter(self, grid: List[List[int]]) -> int:
-        visited=[[0 for i in range(len(grid[0]))] for j in range(len(grid))]
-        directions=[(0,1),(1,0),(-1,0),(0,-1)]
-        re=[]
-        self.dfs(grid,0,0,visited,directions,re)
-        print(re)
-        return sum(re)
-        
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        def inbound(row, col):
+            return (0 <= row < len(grid) and 0 <= col < len(grid[0]))
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j]:
+                    stack=[(i,j)]
+                    visited=set([(i,j)])
+                    ans=0
+                    while stack:
+                        r,c=stack.pop()
+                        for rc,cc in directions:
+                            nr,nc=r+rc,c+cc
+                            if not inbound(nr,nc) or not grid[nr][nc]:
+                                ans+=1
+                            if inbound(nr,nc) and (nr,nc) not in visited and grid[nr][nc]:
+                                stack.append((nr,nc))
+                                visited.add((nr,nc))
+                    return ans
         
