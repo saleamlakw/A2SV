@@ -1,22 +1,21 @@
 class Solution:
-    def inbound(self,grid,r,c):
-        return (0<=r<len(grid) and 0<=c<len(grid[0]))
-    def dfs(self,grid,r,c,visited):
-        visited[r][c]=1
-        directions=[(1,0),[0,1],(0,-1),(-1,0)]
-        for rn,cn in directions:
-            new_row=r+rn
-            new_col=c+cn
-            if (self.inbound(grid,new_row,new_col) and grid[new_row][new_col]=="1") and visited[new_row][new_col]==0:
-                self.dfs(grid,new_row,new_col,visited)
     def numIslands(self, grid: List[List[str]]) -> int:
-        no_island=0
-        visited=[[0 for _ in range(len(grid[0]))] for _ in range(len(grid))]
-        for r in range(len(grid)):
-            for c in range(len(grid[0])):
-                if visited[r][c]==0 and grid[r][c]=="1":
-                    no_island+=1
-                    self.dfs(grid,r,c,visited)
-        return no_island
-                    
-        
+        directions = [(0, 1), (0, -1), (1, 0), (-1, 0)]
+        visited = [[False for i in range(len(grid[0]))] for j in range(len(grid))]
+        def inbound(r,c):
+            return 0<=r<len(grid) and 0<=c<len(grid[0])
+        ans=0
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if not visited[i][j] and grid[i][j]=="1":
+                    ans+=1
+                    stack=[[i,j]]
+                    visited[i][j]=True
+                    while stack:
+                        r,c =stack.pop()
+                        for rc,cc in directions:
+                            nr,nc=r+rc,c+cc
+                            if inbound(nr,nc) and not visited[nr][nc] and grid[nr][nc]=="1":
+                                stack.append([nr,nc])
+                                visited[nr][nc]=True
+        return ans
