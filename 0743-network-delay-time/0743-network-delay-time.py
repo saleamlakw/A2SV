@@ -13,7 +13,7 @@ class Solution:
                 if pathlen+edgelen<distance[nb]:
                     distance[nb]=pathlen+edgelen
                     heappush(queue,[distance[nb],nb])
-        print(distance)
+      
         ans=max(distance[1:])
         if ans==float("inf"):
             return -1
