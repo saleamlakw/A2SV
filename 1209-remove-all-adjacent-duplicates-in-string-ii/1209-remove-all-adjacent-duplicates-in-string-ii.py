@@ -4,21 +4,27 @@ class Solution:
             stack=[]
             i=0
             def check(stack,ele):
-                count=1
-                j=len(stack)-1
-                while j>=0 and stack and stack[j]==ele:
-                    j-=1
-                    count+=1
-                return count>=(k)
+                if stack and stack[-1][0]==ele:
+                    return stack[-1][1]>=(k-1)
+                return False
                 
             for i in range(len(s)):
                 if check(stack,s[i]):
                     for _ in range(k-1):
                         if stack :
                             stack.pop()
+                        else:
+                            break
                 else:
-                    stack.append(s[i])
-            return "".join(stack)
+                    if stack and stack[-1][0]==s[i]:
+                        stack.append([s[i],stack[-1][1]+1])
+                    else:
+                        stack.append([s[i],1])
+            ans=[]
+            for char,count in stack:
+                ans.append(char)
+
+            return "".join(ans)
                 
 
 
