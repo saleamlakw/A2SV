@@ -1,27 +1,26 @@
 class Solution:
     def findTheCity(self, n: int, edges: List[List[int]], distanceThreshold: int) -> int:
-        dist = [[math.inf] * n for _ in range(n)]
-        for i in range(n):
-            dist[i][i] = 0
-
+        graph = collections.defaultdict(list)
+        
         for u, v, w in edges:
-            dist[u][v] = dist[v][u] = w
-
-        for k in range(n):
-            for i in range(n):
-                for j in range(n):
-                    if dist[i][j] > dist[i][k] + dist[k][j]:
-                        dist[i][j] = dist[i][k] + dist[k][j]
-
-        cnt = [0] * n
-        for i in range(n):
-            for j in range(n):
-                if i == j: continue
-                if dist[i][j] <= distanceThreshold:
-                    cnt[j] += 1
-
-        ans = 0
-        for i in range(n):
-            if cnt[i] <= cnt[ans]:
-                ans = i
-        return ans
+            graph[u].append((v, w))
+            graph[v].append((u, w))
+            
+        def getNumberOfNeighbors(city):
+            heap = [(0, city)]
+            dist = {}
+            
+            while heap:
+                currW, u = heapq.heappop(heap)
+                if u in dist:
+                    continue
+                if u != city:    
+                    dist[u] = currW
+                for v, w in graph[u]:
+                    if v in dist:
+                        continue
+                    if currW + w <= distanceThreshold:
+                        heapq.heappush(heap, (currW + w, v))
+            return len(dist)
+        
+        return max([(getNumberOfNeighbors(city), city) for city in range(n)], key=lambda x: (-x[0], x[1]))[-1]
