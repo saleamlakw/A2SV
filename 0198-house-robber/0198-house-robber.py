@@ -1,10 +1,12 @@
 class Solution:
     def rob(self, nums: List[int]) -> int:
-        dp=[0]*(len(nums)+2)
-        for i in range(len(nums)-1,-1,-1):
-                take=nums[i]+dp[i+2]
-                notake=dp[i+1]
-                dp[i]=max(take,notake)
-        return dp[0]
-        
-       
+        memo={}
+        def dp(i):
+            if i>=len(nums):
+                return 0
+            if i not in memo:
+                take = nums[i]+dp(i+2)
+                nottake = dp(i+1)
+                memo[i] = max(take,nottake)
+            return memo[i]
+        return dp(0)
