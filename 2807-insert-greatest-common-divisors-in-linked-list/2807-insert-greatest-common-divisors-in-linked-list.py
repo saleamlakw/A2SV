@@ -4,23 +4,19 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    from math import gcd
     def insertGreatestCommonDivisors(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        li=dummy=ListNode()
-        temp=head
-        if not head and not head.next:
-            return head
-        li.next=ListNode(temp.val)
-        li=li.next
-        while temp.next:
-            x=gcd(temp.val,temp.next.val)
-            li.next=ListNode(x)
-            li=li.next
-            li.next=ListNode(temp.next.val)
-            li=li.next
+        #intialize dummy variable and insert the first node to the dummy linked list 
+        dummy=temp=ListNode()
+        temp.next=ListNode(head.val)
+        temp=temp.next
+        start=head.next
+        #traverse through the linked list starting from the second element and insert the gcd and the node into the dummy linkedlist 
+        pre=head.val
+        while start:
+            temp.next=ListNode(gcd(start.val,pre))
             temp=temp.next
+            temp.next=ListNode(start.val)
+            temp=temp.next
+            pre=start.val
+            start=start.next
         return dummy.next
-            
-            
-        
-        
