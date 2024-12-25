@@ -8,7 +8,7 @@ from collections import deque
 class Solution:
     def largestValues(self, root: Optional[TreeNode]) -> List[int]:
         if not root:
-            return None
+            return []
         qu=deque()
         re=[]
         qu.append(root)
