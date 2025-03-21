@@ -1,43 +1,55 @@
-class Solution:
-    def findAllRecipes(self, recipes: List[str], ingredients: List[List[str]], supplies: List[str]) -> List[str]:
-        supplies=set(supplies)
-        supplies2=set(recipes)
-        # print(supplies,supplies2)
-        graph=defaultdict(list)
-        indegree=defaultdict(int)
-        all=[]
-        for i in range(len(recipes)):
-            ch=True
-            for ele in ingredients[i]:
-                ch = ch and (ele in supplies or ele in supplies2)
-                # print(ch)
-            if ch:
-                all.append(recipes[i])
-                for ele in ingredients[i]:
-                    if ele in recipes:
-                        graph[ele].append(recipes[i])
-                        indegree[recipes[i]]+=1
-        # print(graph)
-        # print(indegree)
-        def topological_sort():
-            
-            result=[]
+class Solution(object):
+    def findAllRecipes(self, recipes, ingredients, supplies):
+        """
+        :type recipes: List[str]
+        :type ingredients: List[List[str]]
+        :type supplies: List[str]
+        :rtype: List[str]
+        """
+        recipesSet = set(recipes)
+        suppliesSet = set(supplies)
 
-            queue=deque()
-            for node in all:
-                if indegree[node]==0:
-                    queue.append(node)
+        graph = defaultdict(list)
+        indegree = defaultdict(int)
+
+       
+        allRecipes = []
+        for idx in range(len(recipes)):
+            checker = True
+            res = []
+            for ingredient in ingredients[idx]:
+                checker = checker and (ingredient in suppliesSet or ingredient in recipesSet)
+                if not checker:
+                    break 
+
             
-            while queue:
-                node=queue.popleft()
-                result.append(node)
+            if checker:
+                allRecipes.append(recipes[idx])
+                for ingredient in ingredients[idx]:
+                    if ingredient in recipesSet:
+                        graph[ingredient].append(recipes[idx])
+                        indegree[recipes[idx]] += 1
+                
+        
+        queue = deque()
+        for ingredient in allRecipes:
+            if indegree[ingredient] == 0:
+                queue.append(ingredient)
+        
+        ans = []
+        while queue:
+            for _ in range(len(queue)):
+                node = queue.popleft()
+                ans.append(node)
 
                 for nb in graph[node]:
-                    indegree[nb]-=1
+                    indegree[nb] -= 1
 
-                    if indegree[nb]==0:
+                    if indegree[nb] == 0:
                         queue.append(nb)
-            # if len(result)!=n:
-            #     return []
-            return result
-        return topological_sort()
+        return ans
+
+            
+
+
+        
