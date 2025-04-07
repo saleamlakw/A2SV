@@ -1,21 +1,15 @@
 class Solution:
     def canPartition(self, nums: List[int]) -> bool:
-
-        if sum(nums)%2!=0:
-            return False
-        target=sum(nums)//2
-        # dp=[0]*len()
-        memo={}
-        def dp(target,i):
-            if target==0:
+        target = sum(nums)/2
+        memo = {}
+        def dp(i,sum_):
+            if sum_ == target:
                 return True
-            if target<0:
+            if sum_>target:
                 return False
-            if i>=len(nums):
+            if i >= len(nums):
                 return False
-            if (target,i) not in memo:
-                memo[(target,i)]=dp(target-nums[i],i+1) or dp(target,i+1)
-            return memo[(target,i)]
-        return dp(target,0)
-
-            
+            if (i,sum_) not in memo:
+                memo[(i,sum_)] =  dp(i+1,sum_+nums[i]) or  dp(i+1,sum_)
+            return memo[(i,sum_)]
+        return dp(0,0)
