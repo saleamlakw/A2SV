@@ -2,25 +2,20 @@ class Solution:
     def findBestValue(self, arr: List[int], target: int) -> int:
         arr.sort()
 
-        running_sum = 0
+        prefix_sum = list(accumulate(arr,initial = 0))
+        ans , diff = 0,float(inf)
 
-        ans = [0,float(inf)]
-        idx = 0
         for val in range(arr[-1]+1):
-            while idx < len(arr) and arr[idx] <= val:
-                running_sum += val
-                idx += 1
-    
-            remain = len(arr) - idx
-            current_sum = running_sum +  (remain * val)
-            difference = abs(target - current_sum)
+            idx = bisect_right(arr,val)
+            current_sum = prefix_sum[idx] + ((len(arr)-idx)*val)
+            difference = abs(current_sum - target)
 
-          
-            if ans[-1] > difference:
-                ans[0] = val
-                ans[-1] = difference
+            if difference < diff:
+                ans = val
+                diff = difference
+        return ans
+
             
-        return ans[0]
 
 
         
