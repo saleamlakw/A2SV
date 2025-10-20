@@ -12,8 +12,8 @@ class LRUCache:
     def put(self, key: int, value: int) -> None:
         if key in self.cach:
              self.cach.move_to_end(key)
-        
-        self.cach[key] = value
+        else:
+            self.cach[key] = value
 
         if len(self.cach) > self.capacity:
             self.cach.popitem(last = False)
