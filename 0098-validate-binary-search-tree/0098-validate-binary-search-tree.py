@@ -19,7 +19,7 @@ class Solution:
                 node = node.left
             
             node = stack.pop()
-            if node.val < prev:
+            if node.val <= prev:
                 return False
             
             prev = node.val
