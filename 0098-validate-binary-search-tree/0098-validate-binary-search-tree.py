@@ -5,18 +5,34 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def inorder(self,root,arr):
-        if not root:
-            return 
-        self.inorder(root.left,arr)
-        arr.append(root.val)
-        self.inorder(root.right,arr)
     def isValidBST(self, root: Optional[TreeNode]) -> bool:
-        arr=[]
-        self.inorder(root,arr)
-        for i in range(1,len(arr)):
-            if arr[i-1]>=arr[i]:
+        if not root:
+            return True
+
+        node = root
+        prev = -inf
+        stack = [node]
+
+        while stack:
+            while node and node.left:
+                stack.append(node.left)
+                node = node.left
+            
+            node = stack.pop()
+            if node.val < prev:
                 return False
-        return True
-    
+            
+            prev = node.val
+
+            if node.right:
+                node = node.right
+                stack.append(node)
+            
+            else:
+                node = None
         
+        return True
+        
+
+      
+    
